@@ -46,6 +46,7 @@ element = document.getElementsByTagName('select')[0];
     })
     b.appendChild(c);
   }
+  x.appendChild(b);
 
    a.addEventListener("click", function(e) {
     /* When the select box is clicked, close any other select boxes,
@@ -57,8 +58,25 @@ element = document.getElementsByTagName('select')[0];
   });
 
 
-// console.log(c)
-  
-console.log(b)
 
-x.appendChild(b);
+function closeAllSelect(elmnt) {
+  /* A function that will close all select boxes in the document,
+  except the current select box: */
+  var x, y, i, xl, yl, arrNo = [];
+  x = document.getElementsByClassName("select-items");
+  y = document.getElementsByClassName("select-selected");
+  xl = x.length;
+  yl = y.length;
+  for (i = 0; i < yl; i++) {
+    if (elmnt == y[i]) {
+      arrNo.push(i)
+    } else {
+      y[i].classList.remove("select-arrow-active");
+    }
+  }
+  for (i = 0; i < xl; i++) {
+    if (arrNo.indexOf(i)) {
+      x[i].classList.add("select-hide");
+    }
+  }
+}

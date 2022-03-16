@@ -1,13 +1,54 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  /* border: 2px solid red; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.65rem 3rem;
+  font-size: 0.55rem;
+  background-color: hsl(209, 23%, 22%);
+  color: white;
+}
+header div {
+  /* border: 2px solid red; */
+  display: flex;
+  font-size: 0.7rem;
+}
+
+form {
+  /* border: 2px solid maroon; */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0rem 3rem;
+  margin-top: 0.6rem;
+}
+
+input[type="text"] {
+  max-width: 18.5rem;
+  width: 90%;
+  padding: 0.5rem;
+  font-size: 0.7rem;
+  background-color: hsl(209, 23%, 22%);
+  color: white;
+}
+
 .custom-select {
   position: relative;
   font-family: Arial;
-  width: 10rem;
+  width: 8rem;
 }
 .custom-select select {
   display: none;
 }
 .select-selected {
-  background-color: DodgerBlue;
+  background-color: hsl(209, 23%, 22%);
+  color: white;
 }
 .select-selected:after {
   position: absolute;
@@ -26,18 +67,21 @@
 .select-items div,
 .select-selected {
   color: #ffffff;
-  padding: 8px 16px;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.7rem;
   border: 1px solid transparent;
   border-color: transparent transparent rgba(0, 0, 0, 0.1) transparent;
   cursor: pointer;
 }
 .select-items {
   position: absolute;
-  background-color: DodgerBlue;
-  top: 100%;
+  background-color: hsl(209, 23%, 22%);
+  color: white;
+  top: 105%;
   left: 0;
   right: 0;
   z-index: 99;
+  /* border: 2px solid rebeccapurple; */
 }
 .select-hide {
   display: none;

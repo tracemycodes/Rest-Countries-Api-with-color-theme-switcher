@@ -16,15 +16,21 @@ header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.65rem 3rem;
+  padding: 0.7rem 3rem;
   font-size: 0.55rem;
   background-color: hsl(209, 23%, 22%);
+
+  box-shadow: 0px 10px 15px 3px rgba(0, 0, 0, 0.1);
   color: white;
 }
 header div {
   /* border: 2px solid red; */
   display: flex;
   font-size: 0.7rem;
+}
+
+header div p {
+  margin-left: 0.4rem;
 }
 
 form {

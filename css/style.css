@@ -1,5 +1,17 @@
 @import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap");
 
+.dark-theme {
+  --background-color: hsl(207, 26%, 17%);
+  --header-color: hsl(209, 23%, 22%);
+  --text-color: #fff;
+}
+
+.light-theme {
+  --background-color: hsl(0, 0%, 98%);
+  --header-color: hsl(0, 0%, 100%);
+  --text-color: hsl(200, 15%, 8%);
+}
+
 * {
   margin: 0;
   padding: 0;
@@ -7,26 +19,26 @@
 }
 
 body {
-  background-color: hsl(207, 26%, 17%);
+  background-color: var(--background-color);
   font-family: "Nunito Sans", sans-serif;
 }
 
 header {
-  /* border: 2px solid red; */
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 0.7rem 3rem;
   font-size: 0.55rem;
-  background-color: hsl(209, 23%, 22%);
-
+  background-color: var(--header-color);
   box-shadow: 0px 10px 15px 3px rgba(0, 0, 0, 0.1);
-  color: white;
+  color: var(--text-color);
 }
-header div {
-  /* border: 2px solid red; */
+header button {
+  border: none;
   display: flex;
   font-size: 0.7rem;
+  background-color: var(--header-color);
+  color: var(--text-color);
 }
 
 header div p {
@@ -34,7 +46,6 @@ header div p {
 }
 
 form {
-  /* border: 2px solid maroon; */
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -49,13 +60,13 @@ input[type="text"] {
   font-size: 0.7rem;
   border: none;
   border-radius: 5px;
-  background-color: hsl(209, 23%, 22%);
+  background-color: var(--header-color);
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
   background-image: url(../images/search.svg);
   background-size: 0.8rem;
   background-repeat: no-repeat;
   background-position: 0.5rem;
-  color: white;
+  color: var(--text-color);
 }
 
 @media (max-width: 34.6875rem) {
@@ -77,9 +88,8 @@ input[type="text"] {
   display: none;
 }
 .select-selected {
-  background-color: hsl(209, 23%, 22%);
-  /* padding: 0.65rem 2rem; */
-  color: white;
+  background-color: var(--header-color);
+  color: var(--text-color);
   border-radius: 4px;
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
 }
@@ -91,15 +101,15 @@ input[type="text"] {
   width: 0;
   height: 0;
   border: 6px solid transparent;
-  border-color: #fff transparent transparent transparent;
+  border-color: var(--text-color) transparent transparent transparent;
 }
 .select-selected.select-arrow-active:after {
-  border-color: transparent transparent #fff transparent;
+  border-color: transparent transparent var(--text-color) transparent;
   top: 7px;
 }
 .select-items div,
 .select-selected {
-  color: #ffffff;
+  color: var(--text-color);
   padding: 0.4rem 0.8rem;
   font-size: 0.7rem;
   border: 1px solid transparent;
@@ -108,13 +118,12 @@ input[type="text"] {
 }
 .select-items {
   position: absolute;
-  background-color: hsl(209, 23%, 22%);
-  color: white;
+  background-color: var(--header-color);
+  color: var(--text-color);
   top: 105%;
   left: 0;
   right: 0;
   z-index: 99;
-  /* border: 2px solid rebeccapurple; */
 }
 .select-hide {
   display: none;
@@ -125,49 +134,36 @@ input[type="text"] {
 }
 
 section {
-  /* border: 2px solid yellowgreen; */
-  /* padding: 0 2rem; */
   width: calc(100% - 6rem);
   margin: auto;
-  /* display: flex;
-  flex-wrap: wrap;
-  gap: 3rem;
-  align-items: center; */
-
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(12.3rem, 1fr));
   gap: 3rem;
-  /* justify-content: center; */
 }
 
 article {
-  /* border: 2px solid orangered; */
-  background-color: hsl(209, 23%, 22%);
+  background-color: var(--header-color);
   border-radius: 6px;
-  color: white;
-  /* margin: 0 0rem 3rem 0rem; */
+  color: var(--text-color);
   padding-bottom: 1rem;
-  /* width: 10.3rem; */
   letter-spacing: 0.07rem;
   line-height: 1rem;
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
-  /* float: right; */
 }
 
 article h2 {
-  font-size: 0.75rem;
+  font-size: 0.85rem;
   margin: 0.8rem;
 }
 
 article p {
-  font-size: 0.6rem;
+  font-size: 0.7rem;
   margin: 0.3rem 0.8rem 0.3rem 0.8rem;
   margin-bottom: 0.3rem;
 }
 
 article .flag {
-  /* border: 1px solid lime; */
-  background-color: lime;
+  background-color: rgb(79, 169, 253);
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   height: 8.2rem;

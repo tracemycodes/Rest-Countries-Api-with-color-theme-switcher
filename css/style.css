@@ -126,7 +126,7 @@ input[type="text"] {
   z-index: 99;
 }
 .select-hide {
-  /* display: none; */
+  display: none;
 }
 .select-items div:hover,
 .same-as-selected {

@@ -1,63 +1,61 @@
-let j, l, ll, element, a, b, c;
+let element, selectDiv, selectItems, selectOptions;
 
-const x = document.querySelector('.custom-select');
 
+// custom selected Div
+const customSelect = document.querySelector('.custom-select');
+// select tag [0] to access the index of the html collection
 element = document.getElementsByTagName('select')[0];
-  
-  a = document.createElement("div");
-  a.setAttribute("class", "select-selected");
-  a.innerHTML = element.options[element.selectedIndex].innerHTML;
-  console.log(x)
-  x.appendChild(a);
+// create a new div to hold the selected value
+selectDiv = document.createElement("div");
+selectDiv.setAttribute("class", "select-selected");
+selectDiv.innerHTML = element.options[element.selectedIndex].innerHTML;
+// I appended the created div with my current select value to my custom select element 
+customSelect.appendChild(selectDiv);
 
-  b = document.createElement('div');
-  b.setAttribute("class", "select-items select-hide");
+// creating a new element for the select items / options
+selectItems = document.createElement('div');
+selectItems.setAttribute("class", "select-items select-hide");
 
-  // console.log(element, x[i])
-
-  for (let i = 1; i < element.length; i++) {
-    const selection = element[i];
-
-
-    c = document.createElement("div");
-    c.innerHTML = element.options[i].innerHTML;
-    // console.log(selection, element.options[i].innerHTML, c)
-    c.addEventListener('click', function (e) {
-      e.preventDefault()
-      // console.log(this)
-      let selectEl = this.parentNode.parentNode.getElementsByTagName("select")[0],
-          UIselect = this.parentNode.previousSibling,
-          sameSelected;
-
-      for (i = 0; i < selectEl.length; i++) {
-          if (selectEl.options[i].innerHTML == this.innerHTML) {
-            selectEl.selectedIndex = i;
-            UIselect.innerHTML = this.innerHTML;
-            sameSelected = this.parentNode.getElementsByClassName("same-as-selected");
+// i looped through all select elements
+for (let i = 1; i < element.length; i++) {
+  // i created div element for each select option
+  selectOptions = document.createElement("div");
+  selectOptions.innerHTML = element.options[i].innerHTML;
+  // adding an event listener to  each select option
+  selectOptions.addEventListener('click', function (e) {
+    e.preventDefault()
+    let selectEl = this.parentNode.parentNode.getElementsByTagName("select")[0],
+    UIselect = this.parentNode.previousSibling,
+    sameSelected;
+    // looped through the select tag elements to get change the value of the recently selected and remove the class of the previous value and adding unto the current value
+    for (let j = 0; j < selectEl.length; j++) {
+      if (selectEl.options[j].innerHTML == this.innerHTML) {
+        selectEl.selectedIndex = j;
+        UIselect.innerHTML = this.innerHTML;
+        sameSelected = this.parentNode.getElementsByClassName("same-as-selected");
             
-            for (k = 0; k < sameSelected.length; k++) {
-              sameSelected[k].removeAttribute("class");
-            }
-            this.setAttribute("class", "same-as-selected");
-            break;
-          }
+        for (let k = 0; k < sameSelected.length; k++) {
+          sameSelected[k].removeAttribute("class");
+        }
+        this.setAttribute("class", "same-as-selected");
+        break;
       }
-      UIselect.click();
-    })
-    b.appendChild(c);
-  }
-  x.appendChild(b);
+    }
+    UIselect.click();
+  })
+  // adding each option to the select items div
+  selectItems.appendChild(selectOptions);
+}
+customSelect.appendChild(selectItems);
 
-   a.addEventListener("click", function(e) {
-    /* When the select box is clicked, close any other select boxes,
-    and open/close the current select box: */
-    e.stopPropagation();
-    closeAllSelect(this);
-    this.nextSibling.classList.toggle("select-hide");
-    this.classList.toggle("select-arrow-active");
-  });
-
-
+selectDiv.addEventListener("click", function(e) {
+  /* When the select box is clicked, close any other select boxes,
+  and open/close the current select box: */
+  e.stopPropagation();
+  closeAllSelect(this);
+  this.nextSibling.classList.toggle("select-hide");
+  this.classList.toggle("select-arrow-active");
+});
 
 function closeAllSelect(elmnt) {
   /* A function that will close all select boxes in the document,

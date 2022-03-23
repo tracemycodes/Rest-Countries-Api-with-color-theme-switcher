@@ -78,3 +78,8 @@ function closeAllSelect(elmnt) {
     }
   }
 }
+
+
+const countryApi = new RestApi()
+
+countryApi.getAllCountries().then(data => data.forEach(element => console.log(element)))

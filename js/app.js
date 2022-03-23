@@ -108,3 +108,8 @@ countryApi.getAllCountries()
     })
     UIdisplay.innerHTML = allCountries;
   })
+
+
+
+countryApi.getSingleCountry()
+  .then(data => console.log(data[0]))

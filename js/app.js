@@ -82,4 +82,29 @@ function closeAllSelect(elmnt) {
 
 const countryApi = new RestApi()
 
-countryApi.getAllCountries().then(data => data.forEach(element => console.log(element)))
+countryApi.getAllCountries()
+.then(data => {
+    let allCountries = ``,
+        UIdisplay = document.querySelector('.countries-display');
+    data.map(country => {
+      // console.log(country);
+      allCountries += `
+        <article>
+            <div class="flag">
+              <img src=${country.flag} alt="">
+            </div>
+            <h2 class="country">${country.name}</h2>
+            <p class="population">
+              <strong>population:</strong> ${country.population}
+            </p>
+            <p class="Region">
+              <strong>Region:</strong> ${country.region}
+            </p>
+            <p class="Capital">
+              <strong>Capital:</strong> ${country.capital}
+            </p>
+          </article>
+      `
+    })
+    UIdisplay.innerHTML = allCountries;
+  })

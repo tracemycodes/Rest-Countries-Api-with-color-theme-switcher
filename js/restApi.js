@@ -11,8 +11,8 @@ class RestApi {
     return countryData;
   }
 
-  async getSingleCountry() {
-    const countryResponse = await fetch('https://restcountries.com/v2/name/peru'),
+  async getSingleCountry(country) {
+    const countryResponse = await fetch(`https://restcountries.com/v2/name/${country}`),
 
           countryData = await countryResponse.json();
 

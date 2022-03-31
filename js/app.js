@@ -1,58 +1,51 @@
 const customSelectDiv = document.querySelector('.custom-select'),
-      selectEl = document.querySelector('select');
+  selectEl = document.querySelector('select'),
+  UIsearch = document.querySelector('#searchInput'),
+  UIform = document.querySelector('form'),
+  UIdisplay = document.querySelector('.countries-display');
 
-const customUISelect = new CustomSelectUI(customSelectDiv, selectEl)
+const countryApi = new RestApi();
+const customUISelect = new CustomSelectUI(customSelectDiv, selectEl);
 
+// created the UI for the all options and the selected option to interact with the HTML custom select
+let UIselectedOption = document.createElement('div'),
+  UIselectItems = document.createElement('div');
 
-// created the UI for the selected options
-let UIselectedOption = document.createElement('div');
-
-customUISelect.appendSelectedDiv(UIselectedOption)
-
-
-let UIselectItems = document.createElement('div');
-
-customUISelect.appendSelectOptions(UIselectItems)
-
-
-
+customUISelect.appendSelectedDiv(UIselectedOption);
+customUISelect.appendSelectOptions(UIselectItems);
 
 for (let i = 1; i < selectEl.length; i++) {
   // i created div element for each select option
-  let selectOptions = document.createElement("div");
-
-  // customUISelect.clickSelected(selectOption)
+  let selectOptions = document.createElement('div');
   selectOptions.innerHTML = selectEl.options[i].innerHTML;
+
   // adding an event listener to  each select option
   selectOptions.addEventListener('click', function (e) {
-    e.preventDefault()
-    customUISelect.clickSelected(e)
-    // displayRegion(UIselect.textContent);
-  })
+    e.preventDefault();
+    customUISelect.clickSelected(e);
+  });
+
   // adding each option to the select items div
   customUISelect.UIselectItems.appendChild(selectOptions);
 }
 customUISelect.customDiv.appendChild(customUISelect.UIselectItems);
 
-UIselectedOption.addEventListener('click', function(e) {
+// Fuction for select dropdown
+UIselectedOption.addEventListener('click', function (e) {
   e.stopPropagation();
-  customUISelect.closeAllSelect(this)
-  this.nextSibling.classList.toggle("select-hide");
-  this.classList.toggle("select-arrow-active");
-})
+  customUISelect.closeAllSelect(this);
+  this.nextSibling.classList.toggle('select-hide');
+  this.classList.toggle('select-arrow-active');
+});
 
+document.addEventListener('DOMContentLoaded', loadAllCountries)
 
-let UIdisplay = document.querySelector('.countries-display');
-
-const countryApi = new RestApi()
-
-countryApi.getAllCountries()
-.then(data => {
-    // let allCountries = ``,
-    data.forEach(country => {
-      // console.log(country);
-      const allCountries = document.createElement('article')
-      allCountries.innerHTML = `
+const loadAllCountries = (e) => {
+  e.preventDefault()
+  countryApi.getAllCountries().then((data) => {
+  data.forEach((country) => {
+    const allCountries = document.createElement('article');
+    allCountries.innerHTML = `
             <div class="flag">
               <img src=${country.flag} alt="">
             </div>
@@ -66,25 +59,21 @@ countryApi.getAllCountries()
             <p class="Capital">
               <strong>Capital:</strong> ${country.capital}
             </p>
-      `
-      UIdisplay.appendChild(allCountries);
-      // console.log(country)
-    })
-  })
-
-
-const UIsearch = document.querySelector('#searchInput'),
-      UIform = document.querySelector('form');
-
+      `;
+    UIdisplay.appendChild(allCountries);
+  });
+});
+}
 
 UIform.addEventListener('submit', (e) => {
-  e.preventDefault()
+  e.preventDefault();
 
-  countryApi.getSingleCountry(UIsearch.value)
-  .then(data => {
-    console.log(data);
-    if (data[0] != undefined) {
-      UIdisplay.innerHTML = `
+  countryApi
+    .getSingleCountry(UIsearch.value)
+    .then((data) => {
+      console.log(data);
+      if (data[0] != undefined) {
+        UIdisplay.innerHTML = `
         <article style="max-width: 25rem; width: 100%; margin: auto;">
             <div class="flag">
               <img src=${data[0].flag} alt="">
@@ -100,37 +89,27 @@ UIform.addEventListener('submit', (e) => {
               <strong>Capital:</strong> ${data[0].capital}
             </p>
           </article>
-      `
-    } else {
-      alert('enter a valid country name')
-    }
-  })
-  .catch(err => console.log(err))  
-})
+      `;
+      } else {
+        alert('enter a valid country name');
+      }
+    })
+    .catch((err) => console.log(err));
+});
 
-// let selectOption = document.querySelector('#region-filter')
-// displayRegion()
-
-// console.log(selectOption.value);
 const displayRegion = (region) => {
-  let countriesArr = [...UIdisplay.children]
+  let countriesArr = [...UIdisplay.children];
 
-  // console.log(countriesArr);
-  countriesArr.forEach(country => {
-    country.style.display = "block";
+  countriesArr.forEach((country) => {
+    let countryName = country.querySelector('.Region').outerText;
+    let regionName = countryName.split(' ')[1];
 
-    let countryName = country.querySelector('.Region').outerText
+    country.style.display = 'block';
 
-    let regionName = countryName.split(' ')[1]
-
-    // console.log(regionName, region);
     if (regionName.toLowerCase().includes(region.toLowerCase())) {
-      country.style.display = "block";
+      country.style.display = 'block';
     } else {
-      country.style.display = "none"
+      country.style.display = 'none';
     }
-
-  })
-}
-
-
+  });
+};

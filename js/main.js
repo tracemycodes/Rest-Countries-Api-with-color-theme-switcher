@@ -32,37 +32,50 @@ customUISelect.appendSelectOptions(UIselectItems)
 
 
 
-for (let i = 1; i < element.length; i++) {
+for (let i = 1; i < selectEl.length; i++) {
   // i created div element for each select option
-  selectOption = document.createElement("div");
+  let selectOptions = document.createElement("div");
 
   // customUISelect.clickSelected(selectOption)
-  selectOptions.innerHTML = element.options[i].innerHTML;
+  selectOptions.innerHTML = selectEl.options[i].innerHTML;
   // adding an event listener to  each select option
   selectOptions.addEventListener('click', function (e) {
     e.preventDefault()
-    let selectEl = this.parentNode.parentNode.getElementsByTagName("select")[0],
-    UIselect = this.parentNode.previousSibling,
-    sameSelected;
-    // console.log("me");
-    // looped through the select tag elements to get change the value of the recently selected and remove the class of the previous value and adding unto the current value
-    for (let j = 0; j < selectEl.length; j++) {
-      if (selectEl.options[j].innerHTML == this.innerHTML) {
-        selectEl.selectedIndex = j;
-        UIselect.innerHTML = this.innerHTML;
-        sameSelected = this.parentNode.getElementsByClassName("same-as-selected");
-            
-        for (let k = 0; k < sameSelected.length; k++) {
-          sameSelected[k].removeAttribute("class");
-        }
-        this.setAttribute("class", "same-as-selected");
-        break;
-      }
-    }
-    UIselect.click();
-    displayRegion(UIselect.textContent);
+    customUISelect.clickSelected(e)
+    // displayRegion(UIselect.textContent);
   })
   // adding each option to the select items div
-  selectItems.appendChild(selectOptions);
+  customUISelect.UIselectItems.appendChild(selectOptions);
 }
 
+customUISelect.customDiv.appendChild(customUISelect.UIselectItems);
+
+UIselectedOption.addEventListener('click', function(e) {
+  e.stopPropagation();
+  closeAllSelect(this);
+  this.nextSibling.classList.toggle("select-hide");
+  this.classList.toggle("select-arrow-active");
+})
+
+
+function closeAllSelect(elmnt) {
+  /* A function that will close all select boxes in the document,
+  except the current select box: */
+  var x, y, i, xl, yl, arrNo = [];
+  x = document.getElementsByClassName("select-items");
+  y = document.getElementsByClassName("select-selected");
+  xl = x.length;
+  yl = y.length;
+  for (i = 0; i < yl; i++) {
+    if (elmnt == y[i]) {
+      arrNo.push(i)
+    } else {
+      y[i].classList.remove("select-arrow-active");
+    }
+  }
+  for (i = 0; i < xl; i++) {
+    if (arrNo.indexOf(i)) {
+      x[i].classList.add("select-hide");
+    }
+  }
+}

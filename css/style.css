@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200&display=swap');
 
 .dark-theme {
   --background-color: hsl(207, 26%, 17%);
@@ -20,7 +20,7 @@
 
 body {
   background-color: var(--background-color);
-  font-family: "Nunito Sans", sans-serif;
+  font-family: 'Nunito Sans', sans-serif;
 }
 
 header {
@@ -53,7 +53,7 @@ form {
   margin: 1.7rem 0;
 }
 
-input[type="text"] {
+input[type='text'] {
   max-width: 18.5rem;
   width: 90%;
   padding: 0.65rem 2rem;
@@ -74,7 +74,7 @@ input[type="text"] {
     flex-direction: column;
     align-items: flex-start;
   }
-  input[type="text"] {
+  input[type='text'] {
     margin-bottom: 1.5rem;
   }
 }
@@ -95,7 +95,7 @@ input[type="text"] {
 }
 .select-selected:after {
   position: absolute;
-  content: "";
+  content: '';
   top: 14px;
   right: 10px;
   width: 0;
@@ -149,6 +149,7 @@ article {
   letter-spacing: 0.07rem;
   line-height: 1rem;
   box-shadow: 0px 10px 15px -3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
 }
 
 article h2 {

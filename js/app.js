@@ -7,6 +7,34 @@ const customSelectDiv = document.querySelector('.custom-select'),
 const countryApi = new RestApi();
 const customUISelect = new CustomSelectUI(customSelectDiv, selectEl);
 
+
+document.addEventListener('DOMContentLoaded', loadAllCountries)
+
+function loadAllCountries(e) {
+  e.preventDefault()
+  countryApi.getAllCountries().then((data) => {
+  data.forEach((country) => {
+    const allCountries = document.createElement('article');
+    allCountries.innerHTML = `
+            <div class="flag">
+              <img src=${country.flag} alt="">
+            </div>
+            <h2 class="country">${country.name}</h2>
+            <p class="population">
+              <strong>population:</strong> ${country.population}
+            </p>
+            <p class="Region">
+              <strong>Region:</strong> ${country.region}
+            </p>
+            <p class="Capital">
+              <strong>Capital:</strong> ${country.capital}
+            </p>
+      `;
+    UIdisplay.appendChild(allCountries);
+  });
+});
+}
+
 // created the UI for the all options and the selected option to interact with the HTML custom select
 let UIselectedOption = document.createElement('div'),
   UIselectItems = document.createElement('div');
@@ -38,32 +66,6 @@ UIselectedOption.addEventListener('click', function (e) {
   this.classList.toggle('select-arrow-active');
 });
 
-document.addEventListener('DOMContentLoaded', loadAllCountries)
-
-const loadAllCountries = (e) => {
-  e.preventDefault()
-  countryApi.getAllCountries().then((data) => {
-  data.forEach((country) => {
-    const allCountries = document.createElement('article');
-    allCountries.innerHTML = `
-            <div class="flag">
-              <img src=${country.flag} alt="">
-            </div>
-            <h2 class="country">${country.name}</h2>
-            <p class="population">
-              <strong>population:</strong> ${country.population}
-            </p>
-            <p class="Region">
-              <strong>Region:</strong> ${country.region}
-            </p>
-            <p class="Capital">
-              <strong>Capital:</strong> ${country.capital}
-            </p>
-      `;
-    UIdisplay.appendChild(allCountries);
-  });
-});
-}
 
 UIform.addEventListener('submit', (e) => {
   e.preventDefault();

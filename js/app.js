@@ -10,8 +10,9 @@ const customUISelect = new CustomSelectUI(customSelectDiv, selectEl);
 
 document.addEventListener('DOMContentLoaded', loadAllCountries)
 
-function loadAllCountries(e) {
-  e.preventDefault()
+function loadAllCountries() {
+  console.log("object");
+  // e.preventDefault()
   countryApi.getAllCountries().then((data) => {
   data.forEach((country) => {
     const allCountries = document.createElement('article');
@@ -50,6 +51,8 @@ for (let i = 1; i < selectEl.length; i++) {
   // adding an event listener to  each select option
   selectOptions.addEventListener('click', function (e) {
     e.preventDefault();
+    // console.log(e.target);
+    displayRegion(e.target.textContent);
     customUISelect.clickSelected(e);
   });
 
@@ -100,6 +103,7 @@ UIform.addEventListener('submit', (e) => {
 });
 
 const displayRegion = (region) => {
+  loadAllCountries()
   let countriesArr = [...UIdisplay.children];
 
   countriesArr.forEach((country) => {

@@ -74,10 +74,10 @@ const displayRegion = (region) => {
   let countriesArr = [...UIdisplay.children];
 
   countriesArr.forEach((country) => {
+    country.style.display = 'block';
     let countryName = country.querySelector('.Region').outerText;
     let regionName = countryName.split(' ')[1];
 
-    country.style.display = 'block';
 
     if (regionName.toLowerCase().includes(region.toLowerCase())) {
       country.style.display = 'block';
@@ -92,9 +92,9 @@ UIsearch.addEventListener('keyup',  (e) => {
   let countriesArr = [...UIdisplay.children];
 
   countriesArr.forEach((country) => {
+    country.style.display = 'block';
     let countryName = country.querySelector('.country').outerText;
 
-    country.style.display = 'block';
 
     if (countryName.toLowerCase().includes(e.target.value.toLowerCase())) {
       country.style.display = 'block';

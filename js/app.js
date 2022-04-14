@@ -9,7 +9,6 @@ const customUISelect = new CustomSelectUI(customSelectDiv, selectEl);
 
 
 document.addEventListener('DOMContentLoaded', loadAllCountries)
-// document.addEventListener('keyUp', displaySinglecountry)
 
 function loadAllCountries() {
   countryApi.getAllCountries().then((data) => {
@@ -30,6 +29,7 @@ function loadAllCountries() {
               <strong>Capital:</strong> ${country.capital}
             </p>
       `;
+      singleCountryDetails(allCountries, country)
     UIdisplay.appendChild(allCountries);
   });
 });
@@ -134,3 +134,65 @@ UIform.addEventListener('submit', (e) => {
     })
     .catch((err) => console.log(err));
 });
+
+
+function singleCountryDetails(currentCountry, country) {
+  // console.log(currentCountry, country);
+  currentCountry.addEventListener('click', (e) => {
+    e.preventDefault()
+    // document.createElement()
+    let singleCountryPage = document.createElement('section')
+    singleCountryPage.className = "single-country-display"
+    singleCountryPage.style.display = "block"
+    singleCountryPage.innerHTML = `
+      <button>Back</button>
+        <div gd-2>
+          <article class="single-country-flag">
+            <div class="single-flag">
+              <img src=${country.flag} alt="">
+            </div>
+          </article>
+          <article class="single-country-details">
+            <h2 class="country single-name">${country.name}</h2>
+            <div class="fl-left">
+              <p class="native-name">
+                <strong>Native Name:</strong> Belge
+              </p>
+              <p class="single-population">
+                <strong>population:</strong> 2,886,026
+              </p>
+              <p class="single-region">
+                <strong>Region:</strong> Europe
+              </p>
+              <p class="sub-region">
+                <strong>Region:</strong> Western Europe
+              </p>
+              <p class="single-capital">
+                <strong>Capital:</strong> Brussels
+              </p>
+            </div>
+            <div class="fl-right">
+              <p class="single-domain">
+                <strong>Top Level Domain:</strong> be
+              </p>
+              <p class="single-currencies">
+                <strong>Currencies:</strong> Euro
+              </p>
+              <p class="single-languages">
+                <strong>Languages:</strong> Dutch, French, German
+              </p>
+            </div>
+            <div class="fl-down">
+              <p>Border Countries</p>
+              <div>
+                <span>France</span>
+                <span>German</span>
+                <span>Netherlands</span>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+    `
+  })
+}

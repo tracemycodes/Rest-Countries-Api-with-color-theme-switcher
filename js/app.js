@@ -9,10 +9,9 @@ const customUISelect = new CustomSelectUI(customSelectDiv, selectEl);
 
 
 document.addEventListener('DOMContentLoaded', loadAllCountries)
+// document.addEventListener('keyUp', displaySinglecountry)
 
 function loadAllCountries() {
-  console.log("object");
-  // e.preventDefault()
   countryApi.getAllCountries().then((data) => {
   data.forEach((country) => {
     const allCountries = document.createElement('article');
@@ -51,7 +50,6 @@ for (let i = 1; i < selectEl.length; i++) {
   // adding an event listener to  each select option
   selectOptions.addEventListener('click', function (e) {
     e.preventDefault();
-    // console.log(e.target);
     displayRegion(e.target.textContent);
     customUISelect.clickSelected(e);
   });
@@ -70,13 +68,48 @@ UIselectedOption.addEventListener('click', function (e) {
 });
 
 
+
+const displayRegion = (region) => {
+  // loadAllCountries()
+  let countriesArr = [...UIdisplay.children];
+
+  countriesArr.forEach((country) => {
+    let countryName = country.querySelector('.Region').outerText;
+    let regionName = countryName.split(' ')[1];
+
+    country.style.display = 'block';
+
+    if (regionName.toLowerCase().includes(region.toLowerCase())) {
+      country.style.display = 'block';
+    } else {
+      country.style.display = 'none';
+    }
+  });
+};
+
+
+UIsearch.addEventListener('keyup',  (e) => {
+  let countriesArr = [...UIdisplay.children];
+
+  countriesArr.forEach((country) => {
+    let countryName = country.querySelector('.country').outerText;
+
+    country.style.display = 'block';
+
+    if (countryName.toLowerCase().includes(e.target.value.toLowerCase())) {
+      country.style.display = 'block';
+    } else {
+      country.style.display = 'none';
+    }
+  });
+})
+
 UIform.addEventListener('submit', (e) => {
   e.preventDefault();
 
   countryApi
     .getSingleCountry(UIsearch.value)
     .then((data) => {
-      console.log(data);
       if (data[0] != undefined) {
         UIdisplay.innerHTML = `
         <article style="max-width: 25rem; width: 100%; margin: auto;">
@@ -101,21 +134,3 @@ UIform.addEventListener('submit', (e) => {
     })
     .catch((err) => console.log(err));
 });
-
-const displayRegion = (region) => {
-  loadAllCountries()
-  let countriesArr = [...UIdisplay.children];
-
-  countriesArr.forEach((country) => {
-    let countryName = country.querySelector('.Region').outerText;
-    let regionName = countryName.split(' ')[1];
-
-    country.style.display = 'block';
-
-    if (regionName.toLowerCase().includes(region.toLowerCase())) {
-      country.style.display = 'block';
-    } else {
-      country.style.display = 'none';
-    }
-  });
-};

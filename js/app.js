@@ -143,6 +143,10 @@ function singleCountryDetails(currentCountry, country) {
   let singleCountryPage = document.createElement('section')
   singleCountryPage.className = "single-country-display"
   currentCountry.addEventListener('click', (e) => {
+    let countriesArr = [...UIdisplay.children];
+    countriesArr.forEach(presentCountry => {
+      presentCountry.style.display = 'none'
+    })
     e.preventDefault()
     // document.createElement()
     console.log(country);

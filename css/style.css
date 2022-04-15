@@ -42,12 +42,16 @@ body {
   margin: 1rem 0 2rem;
 }
 .single-country-display > div {
-  border: 2px solid rgb(0, 17, 252);
+  background-color: var(--background-color);
   width: 100%;
   height: calc(100% - 5rem);
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(18rem, 1fr));
   gap: 2rem;
+}
+.single-country-display article {
+  background-color: var(--background-color);
+  box-shadow: unset;
 }
 .single-flag {
   max-width: 46.6875rem;

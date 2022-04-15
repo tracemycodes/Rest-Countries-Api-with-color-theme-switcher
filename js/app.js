@@ -137,13 +137,15 @@ UIform.addEventListener('submit', (e) => {
 
 
 function singleCountryDetails(currentCountry, country) {
+  const mainSection = document.querySelector('.container')
+  const headerSection = document.querySelector('header')
   // console.log(currentCountry, country);
+  let singleCountryPage = document.createElement('section')
+  singleCountryPage.className = "single-country-display"
   currentCountry.addEventListener('click', (e) => {
     e.preventDefault()
     // document.createElement()
-    console.log("object");
-    let singleCountryPage = document.createElement('section')
-    singleCountryPage.className = "single-country-display"
+    console.log(country);
     singleCountryPage.style.display = "block"
     singleCountryPage.innerHTML = `
       <button class="home-page">Back</button>
@@ -157,30 +159,30 @@ function singleCountryDetails(currentCountry, country) {
             <h2 class="country single-name">${country.name}</h2>
             <div class="fl-left">
               <p class="native-name">
-                <strong>Native Name:</strong> Belge
+                <strong>Native Name:</strong> ${country.nativeName}
               </p>
               <p class="single-population">
-                <strong>population:</strong> 2,886,026
+                <strong>population:</strong> ${country.population}
               </p>
               <p class="single-region">
-                <strong>Region:</strong> Europe
+                <strong>Region:</strong> ${country.region}
               </p>
               <p class="sub-region">
-                <strong>Region:</strong> Western Europe
+                <strong>Region:</strong> ${country.subregion}
               </p>
               <p class="single-capital">
-                <strong>Capital:</strong> Brussels
+                <strong>Capital:</strong> ${country.capital}
               </p>
             </div>
             <div class="fl-right">
               <p class="single-domain">
-                <strong>Top Level Domain:</strong> be
+                <strong>Top Level Domain:</strong> ${country.topLevelDomain[0]}
               </p>
               <p class="single-currencies">
-                <strong>Currencies:</strong> Euro
+                <strong>Currencies:</strong> ${country.currencies.map(currency => currency.name)}
               </p>
               <p class="single-languages">
-                <strong>Languages:</strong> Dutch, French, German
+                <strong>Languages:</strong> ${country.languages.map(language => language.name)}
               </p>
             </div>
             <div class="fl-down">
@@ -196,4 +198,5 @@ function singleCountryDetails(currentCountry, country) {
       </section>
     `
   })
+  mainSection.insertBefore(singleCountryPage, headerSection)
 }

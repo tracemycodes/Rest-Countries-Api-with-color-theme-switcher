@@ -141,11 +141,12 @@ function singleCountryDetails(currentCountry, country) {
   currentCountry.addEventListener('click', (e) => {
     e.preventDefault()
     // document.createElement()
+    console.log("object");
     let singleCountryPage = document.createElement('section')
     singleCountryPage.className = "single-country-display"
     singleCountryPage.style.display = "block"
     singleCountryPage.innerHTML = `
-      <button>Back</button>
+      <button class="home-page">Back</button>
         <div gd-2>
           <article class="single-country-flag">
             <div class="single-flag">

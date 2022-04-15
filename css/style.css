@@ -29,7 +29,6 @@ body {
 
 .single-country-display {
   position: absolute;
-  background-color: #fff;
   top: 4rem;
   left: 3rem;
   width: calc(100% - 6rem);
@@ -54,6 +53,11 @@ body {
   max-width: 46.6875rem;
   width: 100%;
   height: 18rem;
+}
+.single-flag img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }
 .single-country-details .fl-left *+*,
 .single-country-details .fl-right *+* {

@@ -153,7 +153,7 @@ function singleCountryDetails(currentCountry, country) {
     console.log(country);
     singleCountryPage.style.display = "block"
     singleCountryPage.innerHTML = `
-      <button class="home-page">Back</button>
+      <button class="home-page"><i class="fa-solid fa-left-long"></i> Back</button>
         <div gd-2>
           <article class="single-country-flag">
             <div class="single-flag">

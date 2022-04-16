@@ -181,10 +181,10 @@ function singleCountryDetails(currentCountry, country) {
             </div>
             <div class="fl-right">
               <p class="single-domain">
-                <strong>Top Level Domain:</strong> ${country.topLevelDomain[0]}
+                <strong>Top Level Domain:</strong> ${country.topLevelDomain[0].slice(1)}
               </p>
               <p class="single-currencies">
-                <strong>Currencies:</strong> ${country.currencies.map(currency => currency.name)}
+                <strong>Currencies:</strong> ${country.currencies != undefined ? country.currencies.map(currency => currency.name) : `No currency used`}
               </p>
               <p class="single-languages">
                 <strong>Languages:</strong> ${country.languages.map(language => language.name)}
@@ -193,9 +193,7 @@ function singleCountryDetails(currentCountry, country) {
             <div class="fl-down">
               <p>Border Countries</p>
               <div>
-                <span>France</span>
-                <span>German</span>
-                <span>Netherlands</span>
+                ${ country.borders != undefined ? country.borders.map(border => `<span>${border}</span>`) : `No neighbouring country`}
               </div>
             </div>
           </article>

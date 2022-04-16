@@ -142,6 +142,7 @@ function singleCountryDetails(currentCountry, country) {
   // console.log(currentCountry, country);
   let singleCountryPage = document.createElement('section')
   singleCountryPage.className = "single-country-display"
+
   currentCountry.addEventListener('click', (e) => {
     let countriesArr = [...UIdisplay.children];
     countriesArr.forEach(presentCountry => {
@@ -201,6 +202,25 @@ function singleCountryDetails(currentCountry, country) {
         </div>
       </section>
     `
+    let homeBtn = singleCountryPage.querySelector('.home-page')
+    closeBtn(homeBtn, singleCountryPage)
   })
   mainSection.insertBefore(singleCountryPage, headerSection)
 }
+
+
+
+function closeBtn(backBtn, presentPage) {
+  backBtn.addEventListener('click', (e) => {
+  e.preventDefault()
+
+  presentPage.style.display = 'none'
+
+  let countriesArr = [...UIdisplay.children];
+    countriesArr.forEach(presentCountry => {
+      presentCountry.style.display = 'block'
+    })
+
+})
+}
+

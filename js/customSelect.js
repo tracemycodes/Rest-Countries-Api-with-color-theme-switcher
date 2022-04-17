@@ -32,7 +32,6 @@ class CustomSelectUI {
         sameSelected =
           e.target.parentNode.querySelectorAll('.same-as-selected');
       }
-      // console.log(sameSelected);
       sameSelected.forEach((item) => {
         item.classList.remove('same-as-selected');
       });
@@ -42,7 +41,6 @@ class CustomSelectUI {
   }
   closeAllSelect(dropSelect) {
     let arrNo = [];
-    // console.log(dropSelect);
     let x = document.getElementsByClassName('select-items');
     let y = document.getElementsByClassName('select-selected');
 

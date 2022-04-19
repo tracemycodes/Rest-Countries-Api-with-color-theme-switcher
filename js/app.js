@@ -5,34 +5,33 @@ const customSelectDiv = document.querySelector('.custom-select'),
   UIdisplay = document.querySelector('.countries-display'),
   themeBtn = document.querySelector('.theme-btn');
 
-
-
 const countryApi = new RestApi();
 const customUISelect = new CustomSelectUI(customSelectDiv, selectEl);
 
-
-document.addEventListener('DOMContentLoaded', loadAllCountries)
+document.addEventListener('DOMContentLoaded', loadAllCountries);
 
 themeBtn.addEventListener('click', (e) => {
-  e.preventDefault()
-  themeBtn.classList.toggle('dark-mode')
+  e.preventDefault();
+  themeBtn.classList.toggle('dark-mode');
   if (themeBtn.classList.contains('dark-mode')) {
-    document.querySelector('.theme-icon').className = 'theme-icon fa-regular fa-sun'
-    document.body.className = ('dark-theme')
+    document.querySelector('.theme-icon').className =
+      'theme-icon fa-regular fa-sun';
+    document.body.className = 'dark-theme';
   } else {
-    document.querySelector('.theme-icon').className = 'theme-icon fa-solid fa-moon'
-    document.body.className = ('light-theme')
+    document.querySelector('.theme-icon').className =
+      'theme-icon fa-solid fa-moon';
+    document.body.className = 'light-theme';
   }
-  let themeColor = document.body.className
-  setLocalStorage(themeColor)
-})
+  let themeColor = document.body.className;
+  setLocalStorage(themeColor);
+});
 
 function loadAllCountries() {
-  getLocalStorage()
+  getLocalStorage();
   countryApi.getAllCountries().then((data) => {
-  data.forEach((country) => {
-    const allCountries = document.createElement('article');
-    allCountries.innerHTML = `
+    data.forEach((country) => {
+      const allCountries = document.createElement('article');
+      allCountries.innerHTML = `
             <div class="flag">
               <img src=${country.flag} alt="">
             </div>
@@ -47,36 +46,35 @@ function loadAllCountries() {
               <strong>Capital:</strong> ${country.capital}
             </p>
       `;
-      singleCountryDetails(allCountries, country)
-    UIdisplay.appendChild(allCountries);
+      singleCountryDetails(allCountries, country);
+      UIdisplay.appendChild(allCountries);
+    });
   });
-});
 }
-
 
 function setLocalStorage(themeColor) {
   let theme;
-  
-  if (localStorage.getItem('theme') === null) {
-    theme = ''
-  } else {
-    theme = localStorage.getItem("theme");
-  }
-  theme = themeColor
 
-  localStorage.setItem("theme", theme);
+  if (localStorage.getItem('theme') === null) {
+    theme = '';
+  } else {
+    theme = localStorage.getItem('theme');
+  }
+  theme = themeColor;
+
+  localStorage.setItem('theme', theme);
 }
 
 function getLocalStorage() {
   let theme;
-  
+
   if (localStorage.getItem('theme') === null) {
-    theme = 'light-theme'
+    theme = 'light-theme';
   } else {
-    theme = localStorage.getItem("theme");
+    theme = localStorage.getItem('theme');
   }
 
-  document.body.className = theme
+  document.body.className = theme;
 }
 
 // created the UI for the all options and the selected option to interact with the HTML custom select
@@ -111,17 +109,13 @@ UIselectedOption.addEventListener('click', function (e) {
   this.classList.toggle('select-arrow-active');
 });
 
-
-
 const displayRegion = (region) => {
-  // loadAllCountries()
   let countriesArr = [...UIdisplay.children];
 
   countriesArr.forEach((country) => {
     country.style.display = 'block';
     let countryName = country.querySelector('.Region').outerText;
     let regionName = countryName.split(' ')[1];
-
 
     if (regionName.toLowerCase().includes(region.toLowerCase())) {
       country.style.display = 'block';
@@ -131,14 +125,12 @@ const displayRegion = (region) => {
   });
 };
 
-
-UIsearch.addEventListener('keyup',  (e) => {
+UIsearch.addEventListener('keyup', (e) => {
   let countriesArr = [...UIdisplay.children];
 
   countriesArr.forEach((country) => {
     country.style.display = 'block';
     let countryName = country.querySelector('.country').outerText;
-
 
     if (countryName.toLowerCase().includes(e.target.value.toLowerCase())) {
       country.style.display = 'block';
@@ -146,7 +138,7 @@ UIsearch.addEventListener('keyup',  (e) => {
       country.style.display = 'none';
     }
   });
-})
+});
 
 UIform.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -179,23 +171,20 @@ UIform.addEventListener('submit', (e) => {
     .catch((err) => console.log(err));
 });
 
-
 function singleCountryDetails(currentCountry, country) {
-  const mainSection = document.querySelector('.container')
-  const headerSection = document.querySelector('header')
-  
-  let singleCountryPage = document.createElement('section')
-  singleCountryPage.className = "single-country-display"
+  const mainSection = document.querySelector('.container');
+  const headerSection = document.querySelector('header');
+
+  let singleCountryPage = document.createElement('section');
+  singleCountryPage.className = 'single-country-display';
 
   currentCountry.addEventListener('click', (e) => {
     let countriesArr = [...UIdisplay.children];
-    countriesArr.forEach(presentCountry => {
-      presentCountry.style.display = 'none'
-    })
-    e.preventDefault()
-    // document.createElement()
-    console.log(country);
-    singleCountryPage.style.display = "block"
+    countriesArr.forEach((presentCountry) => {
+      presentCountry.style.display = 'none';
+    });
+    e.preventDefault();
+    singleCountryPage.style.display = 'block';
     singleCountryPage.innerHTML = `
       <button class="home-page"><i class="fa-solid fa-left-long"></i> Back</button>
         <div gd-2>
@@ -225,44 +214,52 @@ function singleCountryDetails(currentCountry, country) {
             </div>
             <div class="fl-right">
               <p class="single-domain">
-                <strong>Top Level Domain:</strong> ${country.topLevelDomain[0].slice(1)}
+                <strong>Top Level Domain:</strong> ${country.topLevelDomain[0].slice(
+                  1
+                )}
               </p>
               <p class="single-currencies">
-                <strong>Currencies:</strong> ${country.currencies != undefined ? country.currencies.map(currency => currency.name) : `No currency used`}
+                <strong>Currencies:</strong> ${
+                  country.currencies != undefined
+                    ? country.currencies.map((currency) => currency.name)
+                    : `No currency used`
+                }
               </p>
               <p class="single-languages">
-                <strong>Languages:</strong> ${country.languages.map(language => language.name)}
+                <strong>Languages:</strong> ${country.languages.map(
+                  (language) => language.name
+                )}
               </p>
             </div>
             <div class="fl-down">
               <p>Border Countries</p>
               <div>
-                ${ country.borders != undefined ? country.borders.map(border => `<span>${border}</span>`) : `No neighbouring country`}
+                ${
+                  country.borders != undefined
+                    ? country.borders.map((border) => `<span>${border}</span>`)
+                    : `No neighbouring country`
+                }
               </div>
             </div>
           </article>
         </div>
       </section>
-    `
-    let homeBtn = singleCountryPage.querySelector('.home-page')
-    closeBtn(homeBtn, singleCountryPage)
-  })
-  mainSection.insertBefore(singleCountryPage, headerSection)
+    `;
+    let homeBtn = singleCountryPage.querySelector('.home-page');
+    closeBtn(homeBtn, singleCountryPage);
+  });
+  mainSection.insertBefore(singleCountryPage, headerSection);
 }
-
-
 
 function closeBtn(backBtn, presentPage) {
   backBtn.addEventListener('click', (e) => {
-  e.preventDefault()
+    e.preventDefault();
 
-  presentPage.style.display = 'none'
+    presentPage.style.display = 'none';
 
-  let countriesArr = [...UIdisplay.children];
-    countriesArr.forEach(presentCountry => {
-      presentCountry.style.display = 'block'
-    })
-
-})
+    let countriesArr = [...UIdisplay.children];
+    countriesArr.forEach((presentCountry) => {
+      presentCountry.style.display = 'block';
+    });
+  });
 }
-

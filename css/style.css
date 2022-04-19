@@ -124,6 +124,9 @@ header button {
   color: var(--text-color);
   cursor: pointer;
 }
+.theme-icon{
+  margin-right: 0.5rem;
+}
 header div p {
   margin-left: 0.4rem;
 }
@@ -233,7 +236,6 @@ article p {
   margin-bottom: 0.3rem;
 }
 article .flag {
-  background-color: rgb(79, 169, 253);
   border-top-left-radius: 6px;
   border-top-right-radius: 6px;
   height: 8.2rem;

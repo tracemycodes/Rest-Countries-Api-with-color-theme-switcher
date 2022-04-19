@@ -2,7 +2,10 @@ const customSelectDiv = document.querySelector('.custom-select'),
   selectEl = document.querySelector('select'),
   UIsearch = document.querySelector('#searchInput'),
   UIform = document.querySelector('form'),
-  UIdisplay = document.querySelector('.countries-display');
+  UIdisplay = document.querySelector('.countries-display'),
+  themeBtn = document.querySelector('.theme-btn');
+
+
 
 const countryApi = new RestApi();
 const customUISelect = new CustomSelectUI(customSelectDiv, selectEl);
@@ -10,7 +13,22 @@ const customUISelect = new CustomSelectUI(customSelectDiv, selectEl);
 
 document.addEventListener('DOMContentLoaded', loadAllCountries)
 
+themeBtn.addEventListener('click', (e) => {
+  e.preventDefault()
+  themeBtn.classList.toggle('dark-mode')
+  if (themeBtn.classList.contains('dark-mode')) {
+    document.querySelector('.theme-icon').className = 'theme-icon fa-regular fa-sun'
+    document.body.className = ('dark-theme')
+  } else {
+    document.querySelector('.theme-icon').className = 'theme-icon fa-solid fa-moon'
+    document.body.className = ('light-theme')
+  }
+  let themeColor = document.body.className
+  setLocalStorage(themeColor)
+})
+
 function loadAllCountries() {
+  getLocalStorage()
   countryApi.getAllCountries().then((data) => {
   data.forEach((country) => {
     const allCountries = document.createElement('article');
@@ -33,6 +51,32 @@ function loadAllCountries() {
     UIdisplay.appendChild(allCountries);
   });
 });
+}
+
+
+function setLocalStorage(themeColor) {
+  let theme;
+  
+  if (localStorage.getItem('theme') === null) {
+    theme = ''
+  } else {
+    theme = localStorage.getItem("theme");
+  }
+  theme = themeColor
+
+  localStorage.setItem("theme", theme);
+}
+
+function getLocalStorage() {
+  let theme;
+  
+  if (localStorage.getItem('theme') === null) {
+    theme = 'light-theme'
+  } else {
+    theme = localStorage.getItem("theme");
+  }
+
+  document.body.className = theme
 }
 
 // created the UI for the all options and the selected option to interact with the HTML custom select
@@ -139,7 +183,7 @@ UIform.addEventListener('submit', (e) => {
 function singleCountryDetails(currentCountry, country) {
   const mainSection = document.querySelector('.container')
   const headerSection = document.querySelector('header')
-  // console.log(currentCountry, country);
+  
   let singleCountryPage = document.createElement('section')
   singleCountryPage.className = "single-country-display"
 
